@@ -80,7 +80,6 @@ const alimentaSesiData = {
       "Sabor caseiro com garantia de segurança industrial"
     ],
     jeitoFooter: "✨ Atendemos indústrias de todos os portes com paixão, dedicação e carinho.",
-    // Mapeado com a dupla extensão da sua captura de tela
     jeitoPhoto: "assets/img_atendimento_humanizado.jpg.jpg",
     trainingsTitle: "Capacitação Contínua",
     trainingsIntro: "Nossas equipes participam de capacitações constantes nos canais físicos e digitais.",
@@ -93,7 +92,6 @@ const alimentaSesiData = {
   
   education: {
     headline: "Educação & Campanhas",
-    // Mapeado com a dupla extensão da sua captura de tela
     img: "assets/img_education_main.jpg.jpg",
     intro: "Disseminamos conhecimento alimentar de ponta para os trabalhadores realizarem escolhas equilibradas e colherem mais saúde.",
     campaignsIntro: "Ações contínuas realizadas diretamente nas linhas do refeitório de forma lúdica:",
@@ -103,7 +101,6 @@ const alimentaSesiData = {
       { id: 3, title: "🥗 Escolha Saudável", desc: "Campanhas dinâmicas auxiliando na divisão ideal de um prato harmonioso (50% saladas, 25% proteínas, 25% grãos)." },
       { id: 4, title: "🩺 Nutrição Preventiva", desc: "Ações de monitoramento focadas na prevenção primária de doenças crônicas como hipertensão e diabetes." }
     ],
-    // Mapeado com a dupla extensão da sua captura de tela
     img2: "assets/img_education_footer.jpg.jpg"
   },
   
@@ -133,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
   lucide.createIcons();
   adjustScale();
   
-  // Define os estados iniciais dos componentes de Dashboard (evitando lacunas vazias)
+  // Define os estados iniciais dos componentes
   selectBuffetService(1);
   setKitchenTab('quality');
   selectKitchenEquip('forno');
@@ -146,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Função de Escalonamento Robusta (Previne quebra de layout)
+ * Função de Escalonamento Robusta por Proporção Física em Matriz (translate e scale combinados)
  */
 function adjustScale() {
   const stage = document.querySelector('.totem-stage');
@@ -161,15 +158,10 @@ function adjustScale() {
   const scaleX = winWidth / targetWidth;
   const scaleY = winHeight / targetHeight;
   
-  // Utiliza a menor proporção para caber perfeitamente sem barras de rolagem
   const scale = Math.min(scaleX, scaleY);
   
-  stage.style.transform = `scale(${scale})`;
-  
-  // Centralização física para qualquer monitor
-  stage.style.position = 'absolute';
-  stage.style.top = `${(winHeight - (targetHeight * scale)) / 2}px`;
-  stage.style.left = `${(winWidth - (targetWidth * scale)) / 2}px`;
+  // Posicionamento absoluto centralizado por matriz de transformação sem conflitos com flexbox
+  stage.style.transform = `translate(-50%, -50%) scale(${scale})`;
 }
 
 window.addEventListener('resize', adjustScale);
@@ -292,7 +284,7 @@ function hydrateData() {
   setElementHTML("edu-camp-desc-4", alimentaSesiData.education.campaigns[3].desc);
   setElementAttr("edu-img-2", "src", alimentaSesiData.education.img2);
   
-  // Elementos de Backup Ocultos (Preservação de IDs de Validação)
+  // Elementos de Backup Ocultos
   setElementHTML("edu-camp-1-title", alimentaSesiData.education.campaigns[0].title);
   setElementHTML("edu-camp-1-desc", alimentaSesiData.education.campaigns[0].desc);
   setElementHTML("edu-camp-2-title", alimentaSesiData.education.campaigns[1].title);
@@ -345,7 +337,6 @@ function openPanel(name) {
   panel.setAttribute('aria-hidden', 'false');
   backdrop.classList.add('open');
   
-  // Restaura os estados padrão para evitar exibição de telas em branco
   if (name === 'buffet') selectBuffetService(1);
   if (name === 'kitchen') {
     setKitchenTab('quality');

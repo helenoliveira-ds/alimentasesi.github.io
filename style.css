@@ -12,12 +12,12 @@ html, body {
   justify-content: center;
   background: #031409;
   
-  /* Desativação total de comportamentos de Desktop no Totem */
-  touch-action: none; /* Previne duplo toque e zoom de pinça */
-  -webkit-touch-callout: none; /* Bloqueia menu de toque prolongado no iOS */
-  -webkit-user-select: none; /* Previne seleção azul de bloco de texto */
+  /* Desativação total de interações nativas do navegador no Totem */
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
   user-select: none;
-  -webkit-tap-highlight-color: transparent; /* Remove flash cinza ao tocar */
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -28,20 +28,28 @@ body {
   font-family: 'Fraunces', serif; 
 }
 
-/* Stage do Totem em Proporção Rígida 9:16 vertical */
+/* Moldura Rígida Centrada do Totem (1080x1920) */
 .totem-stage {
   width: 1080px;
   height: 1920px;
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transform-origin: center center;
   overflow: hidden;
   box-shadow: 0 35px 80px -15px rgba(0, 0, 0, 0.95);
-  transform-origin: center center;
-  flex-shrink: 0;
   background: #020c05;
 }
 
-/* Hotspots pulsares com animações suaves */
+/* Camada dos Hotspots: Permite ignorar cliques nas áreas transparentes */
+.hotspots-layer {
+  pointer-events: none;
+}
+
+/* Hotspots: Reativa eventos apenas no botão em si */
 .hotspot { 
+  pointer-events: auto;
   animation: floatIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; 
   cursor: pointer;
   outline: none;
@@ -111,6 +119,9 @@ body {
 }
 .panel-section.active { 
   display: flex; 
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
   animation: fadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) both; 
 }
 
