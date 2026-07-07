@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Totem alimentaSesi</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <!-- Container principal para centralização e auto-escala do Totem -->
+    <div class="totem-wrapper" id="totem-wrapper">
+      <div class="totem-screen" id="totem-screen">
+        
+        <!-- Fundo de Cenário (Fallback Gradiente Elegante antes da imagem ser carregada) -->
+        <div class="fundo-cenario"></div>
+        
+        <!-- Overlay de sombreamento quando o painel lateral estiver aberto -->
+        <div class="backdrop-overlay" id="backdrop-overlay"></div>
+
+        <!-- Header Fixo no Topo -->
+        <header class="header-totem" id="header-totem">
+          <!-- Hotspot Especial: Marca alimentaSesi / Impacto em Números -->
+          <div class="header-badge-trigger" id="badge-impacto" role="button" aria-label="Abrir Impacto em Números">
+            <div class="logo-container">
+              <!-- Ícone do Coração Oficial alimentaSesi -->
+              <svg class="logo-heart-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Fita azul esquerda -->
+                <path d="M12.5 6C7.5 6 4 9.5 4 14.5C4 20.5 11 25.5 16 27C14 23 11 18.5 11 14.5C11 11 13 8.5 15.5 8.5C16.5 8.5 17.5 9 18 9.5C17 8.5 16 7.5 14.5 7C13.8 6.3 13.2 6 12.5 6Z" fill="#54c0e8"/>
+                <!-- Fita verde direita -->
+                <path d="M19.5 6C24.5 6 28 9.5 28 14.5C28 20.5 21 25.5 16 27C18 23 21 18.5 21 14.5C21 11 19 8.5 16.5 8.5C15.5 8.5 14.5 9 14 9.5C15 8.5 16 7.5 17.5 7C18.2 6.3 18.8 6 19.5 6Z" fill="#3dae2b"/>
+              </svg>
+              <span class="logo-fallback" style="color: #ff4713;">alimenta<strong style="color: #007934;">Sesi</strong></span>
+            </div>
+            <!-- Indicador pulsante acoplado à marca, como no vídeo -->
+            <div class="badge-pulse">
+              <span class="pulse-ring"></span>
+              <span class="pulse-dot"></span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Seção Hero: Títulos Principais sempre visíveis -->
+        <section class="hero-section" id="hero-section">
+          <h1 class="hero-title" id="hero-title">Explore a experiência alimentaSesi</h1>
+        </section>
+
+        <!-- Container de Hotspots interativos posicionados sobre o cenário -->
+        <div class="hotspots-container" id="hotspots-container">
+          
+          <!-- Hotspot: Educação Nutricional (Verde) -->
+          <div class="hotspot" id="hotspot-educacao" style="top: 730px; left: 280px;">
+            <div class="hotspot-trigger">
+              <span class="hotspot-ring"></span>
+              <span class="hotspot-dot"></span>
+            </div>
+            <button class="hotspot-label label-green" id="btn-hotspot-educacao">
+              Educação Nutricional
+            </button>
+          </div>
+
+          <!-- Hotspot: Nossa Equipe (Azul) -->
+          <div class="hotspot" id="hotspot-equipe" style="top: 860px; left: 540px;">
+            <div class="hotspot-trigger">
+              <span class="hotspot-ring"></span>
+              <span class="hotspot-dot"></span>
+            </div>
+            <button class="hotspot-label label-blue" id="btn-hotspot-equipe">
+              Nossa Equipe
+            </button>
+          </div>
+
+          <!-- Hotspot: Restaurante & Buffet (Verde) -->
+          <div class="hotspot" id="hotspot-buffet" style="top: 1130px; left: 530px;">
+            <div class="hotspot-trigger">
+              <span class="hotspot-ring"></span>
+              <span class="hotspot-dot"></span>
+            </div>
+            <button class="hotspot-label label-green" id="btn-hotspot-buffet">
+              Restaurante & Buffet
+            </button>
+          </div>
+
+          <!-- Hotspot: Cozinha Industrial (Laranja) -->
+          <div class="hotspot hotspot-reverse" id="hotspot-cozinha" style="top: 660px; left: 810px;">
+            <div class="hotspot-trigger">
+              <span class="hotspot-ring"></span>
+              <span class="hotspot-dot"></span>
+            </div>
+            <button class="hotspot-label label-orange" id="btn-hotspot-cozinha">
+              Cozinha Industrial
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Instrução de Toque Flutuante no Rodapé -->
+        <footer class="footer-instrucao" id="footer-instrucao">
+          <div class="instrucao-capsula">
+            <span class="instrucao-texto">Toque nos hotspots para explorar o ambiente</span>
+          </div>
+        </footer>
+
+        <!-- Painel Lateral Deslizante (Side Panel) -->
+        <aside class="side-panel" id="side-panel">
+          <!-- Botão Fechar -->
+          <button class="panel-close-btn" id="panel-close-btn" aria-label="Fechar Painel">
+            <!-- Ícone elegante de fechar (X) feito em SVG puro para alta fidelidade -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+
+          <!-- Cabeçalho Interno do Painel com Logo -->
+          <div class="panel-header" id="panel-header">
+            <div class="logo-container">
+              <!-- Ícone do Coração Oficial alimentaSesi -->
+              <svg class="logo-heart-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Fita azul esquerda -->
+                <path d="M12.5 6C7.5 6 4 9.5 4 14.5C4 20.5 11 25.5 16 27C14 23 11 18.5 11 14.5C11 11 13 8.5 15.5 8.5C16.5 8.5 17.5 9 18 9.5C17 8.5 16 7.5 14.5 7C13.8 6.3 13.2 6 12.5 6Z" fill="#54c0e8"/>
+                <!-- Fita verde direita -->
+                <path d="M19.5 6C24.5 6 28 9.5 28 14.5C28 20.5 21 25.5 16 27C18 23 21 18.5 21 14.5C21 11 19 8.5 16.5 8.5C15.5 8.5 14.5 9 14 9.5C15 8.5 16 7.5 17.5 7C18.2 6.3 18.8 6 19.5 6Z" fill="#3dae2b"/>
+              </svg>
+              <span class="logo-fallback" style="color: #ff4713; font-size: 26px;">alimenta<strong style="color: #007934;">Sesi</strong></span>
+            </div>
+          </div>
+
+          <!-- Conteúdo do Painel (Sendo preenchido dinamicamente via JS) -->
+          <div class="panel-content-wrapper" id="panel-content">
+            <div class="panel-placeholder-info">
+              <h2 class="panel-title" id="panel-title">Título do Tema</h2>
+              <div class="panel-body" id="panel-body">
+                <!-- Estrutura preparada para receber o conteúdo real -->
+                <p>O conteúdo detalhado do tema selecionado será carregado aqui de forma limpa e organizada.</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+
+    <!-- Script de controle e comportamento -->
+    <script type="module" src="/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "name": "Totem alimentaSesi",
+  "description": "Aplicação interativa de totem institucional vertical (1080x1920) para o alimentaSesi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

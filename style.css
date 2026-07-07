@@ -1,0 +1,652 @@
+/* ==========================================================================
+   CONFIGURAÇÃO DE FONTES E VARIÁVEIS CSS
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;800&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+  /* Paleta de Cores Institucionais alimentaSesi */
+  --color-green: #3dae2b;
+  --color-green-hover: #007934;
+  --color-green-light: #e6f7ee;
+  
+  --color-blue: #54c0e8;
+  --color-blue-hover: #0099d8;
+  --color-blue-light: #e6f7fd;
+  
+  --color-orange: #ff4713;
+  --color-orange-hover: #d13000;
+  --color-orange-light: #fff3f0;
+
+  --color-brand-dark: #007934; /* Verde Escuro Institucional */
+  --color-brand-blue: #007934; 
+  --color-white: #ffffff;
+  --color-black: #000000;
+  
+  /* Tons Neutros para Interface */
+  --neutral-bg-dark: #0f172a;
+  --neutral-bg-light: #f8fafc;
+  --neutral-border: #e2e8f0;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  /* Sizing & Sombra */
+  --panel-width: 756px; /* Exatamente 70% da tela de 1080px */
+  --panel-shadow: -10px 0 40px rgba(0, 0, 0, 0.25);
+  --badge-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  --hotspot-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  
+  /* Tipografia */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Reset Geral e Otimização para Totem */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none; /* Previne seleção acidental em telas de toque */
+  -webkit-user-drag: none; /* Desativa arrastar de imagens */
+  -webkit-tap-highlight-color: transparent; /* Remove o highlight azul ao tocar */
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #0b0f19;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   LAYOUT DO TOTEM (FALBACK & AUTO-ESCALA)
+   ========================================================================== */
+
+/* Wrapper principal que simula o Totem e centraliza na janela de desenvolvimento */
+.totem-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+}
+
+/* A tela interna fixa de 1080 x 1920 pixels */
+.totem-screen {
+  width: 1080px;
+  height: 1920px;
+  min-width: 1080px;
+  min-height: 1920px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transform-origin: center center;
+  overflow: hidden;
+  background-color: #121824;
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.8);
+}
+
+/* Imagem de Fundo (Cenário) com Fallback */
+.fundo-cenario {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-image: url('/assets/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Se a imagem de fundo estiver ausente, mostra este belo degradê decorativo */
+.fundo-cenario:only-child,
+.fundo-cenario:not([style*="background-image"]) {
+  background: linear-gradient(135deg, #101827 0%, #1f293d 50%, #0f172a 100%);
+}
+
+/* Backdrop escurecido ao abrir o painel lateral para aumentar o foco e imersão */
+.backdrop-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 80;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(4px); /* Suave efeito de desfoque */
+}
+
+.backdrop-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ==========================================================================
+   COMPONENTES: HEADER DO TOTEM
+   ========================================================================== */
+.header-totem {
+  position: absolute;
+  top: 60px; /* Mais baixo para perfeita sensibilidade do toque no totem */
+  left: 0;
+  width: 100%;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 95; /* Fica acima de todo conteúdo do cenário */
+  pointer-events: none; /* Deixa cliques passarem no fundo, apenas o badge interno captura */
+}
+
+/* Badge Interativo da Marca no Topo (Abre Impacto em Números) */
+.header-badge-trigger {
+  background: var(--color-white);
+  border-radius: 50px;
+  padding: 16px 36px; /* Aumentado para área de toque muito mais generosa e acessível */
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--badge-shadow);
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto; /* Ativa detecção de toque individualmente */
+}
+
+.header-badge-trigger:active {
+  transform: scale(0.95);
+  border-color: var(--color-green);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Símbolo do Coração Sesi em SVG integrado */
+.logo-heart-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.logo-fallback {
+  font-family: var(--font-sans);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--color-orange); /* Laranja suave */
+  letter-spacing: -0.5px;
+}
+
+.logo-fallback strong {
+  color: var(--color-green-hover); /* Verde Sesi */
+  font-weight: 700;
+}
+
+/* Pulsante verde do badge */
+.badge-pulse {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.badge-pulse .pulse-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-green);
+  border-radius: 50%;
+  animation: pulse-ring-glow 2s infinite ease-out;
+}
+
+.badge-pulse .pulse-dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-green);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+/* Badge Secundário Fixo no Topo Direito (Buffet Executivo) */
+.header-badge-secondary {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  padding: 14px 28px;
+  box-shadow: var(--badge-shadow);
+}
+
+.header-badge-secondary span {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-white);
+  letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   COMPONENTES: HERO TITLE (TÍTULO PRINCIPAL)
+   ========================================================================== */
+.hero-section {
+  position: absolute;
+  top: 180px;
+  left: 0;
+  width: 100%;
+  padding: 0 60px;
+  text-align: left;
+  z-index: 10;
+  pointer-events: none; /* Deixa o toque passar para os hotspots */
+}
+
+.hero-title {
+  font-family: var(--font-title);
+  font-size: 54px;
+  font-weight: 800;
+  color: var(--color-white);
+  letter-spacing: -1.5px;
+  line-height: 1.15;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3);
+  animation: fade-in-up 1s ease-out;
+}
+
+/* ==========================================================================
+   COMPONENTES: HOTSPOTS INTERATIVOS
+   ========================================================================== */
+.hotspots-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+}
+
+.hotspot {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transform: translate(-20px, -20px); /* Alinha o centro da bolinha exatamente na coordenada */
+  animation: float-soft 3s ease-in-out infinite alternate;
+}
+
+/* Inversão do layout para hotspots do lado direito, evitando transbordamentos */
+.hotspot-reverse {
+  flex-direction: row-reverse;
+}
+
+/* Estilos individuais de animação flutuante dessincronizados para naturalidade */
+#hotspot-educacao { animation-delay: 0.2s; }
+#hotspot-equipe { animation-delay: 0.7s; }
+#hotspot-cozinha { animation-delay: 1.2s; }
+#hotspot-buffet { animation-delay: 1.8s; }
+
+/* O Gatilho Circular do Hotspot */
+.hotspot-trigger {
+  width: 44px;
+  height: 44px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Anel externo pulsante */
+.hotspot-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 3px solid var(--color-white);
+  border-radius: 50%;
+  animation: pulse-ring-glow 2.5s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* Ponto interno sólido */
+.hotspot-dot {
+  width: 18px;
+  height: 18px;
+  background-color: var(--color-white);
+  border-radius: 50%;
+  z-index: 2;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* O Botão/Pílula de Texto ao Lado do Círculo */
+.hotspot-label {
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-white);
+  padding: 16px 32px;
+  border-radius: 50px;
+  box-shadow: var(--hotspot-shadow);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+/* Cores específicas de cada botão */
+.label-green {
+  background-color: var(--color-green);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+.label-green:active {
+  background-color: var(--color-green-hover);
+  transform: scale(0.95);
+}
+
+.label-blue {
+  background-color: var(--color-blue);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+.label-blue:active {
+  background-color: var(--color-blue-hover);
+  transform: scale(0.95);
+}
+
+.label-orange {
+  background-color: var(--color-orange);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+.label-orange:active {
+  background-color: var(--color-orange-hover);
+  transform: scale(0.95);
+}
+
+/* ==========================================================================
+   COMPONENTES: INSTRUÇÃO DE TOQUE NO RODAPÉ
+   ========================================================================== */
+.footer-instrucao {
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.instrucao-capsula {
+  background-color: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50px;
+  padding: 16px 36px;
+  box-shadow: var(--badge-shadow);
+  animation: pulse-capsule 2.5s ease-in-out infinite alternate;
+}
+
+.instrucao-texto {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 500;
+  color: #cbd5e1;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   COMPONENTES: PAINEL LATERAL DESLIZANTE (SIDE PANEL)
+   ========================================================================== */
+.side-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--panel-width);
+  height: 100%;
+  background-color: var(--neutral-bg-light);
+  box-shadow: var(--panel-shadow);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  
+  /* GPU-Accelerated hardware transition para performance impecável no Totem */
+  transform: translateX(100%);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* Classe ativa aplicada via JS para deslizar o painel */
+.side-panel.open {
+  transform: translateX(0);
+}
+
+/* Botão elegante de fechar no topo direito */
+.panel-close-btn {
+  position: absolute;
+  top: 35px;
+  right: 35px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--color-white);
+  border: 1px solid var(--neutral-border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 110;
+}
+
+.panel-close-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.panel-close-btn:active {
+  transform: scale(0.9) rotate(90deg);
+  background-color: var(--neutral-border);
+  color: var(--color-black);
+}
+
+/* Cabeçalho do Painel Lateral */
+.panel-header {
+  height: 140px;
+  padding: 40px 45px 0 45px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid transparent; /* Pode ser ativado se necessário */
+  background-color: var(--neutral-bg-light);
+}
+
+.panel-logo-brand {
+  font-family: var(--font-sans);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--color-blue);
+  letter-spacing: -0.5px;
+}
+
+.panel-logo-brand strong {
+  color: var(--color-green);
+  font-weight: 700;
+}
+
+/* Wrapper de Conteúdo com rolagem interna */
+.panel-content-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 45px 50px 45px;
+  display: flex;
+  flex-direction: column;
+  
+  /* Suavização de rolagem nativa para Android Touch */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Remover barra de rolagem visualmente mantendo a rolagem para um design mais limpo */
+.panel-content-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+.panel-content-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+.panel-content-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+
+/* Estilos de Elementos Internos de Conteúdo */
+.panel-placeholder-info {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.panel-title {
+  font-family: var(--font-title);
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.panel-body {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.panel-body p {
+  margin-bottom: 16px;
+}
+
+/* ==========================================================================
+   ANIMAÇÕES (KEYFRAMES)
+   ========================================================================== */
+
+/* Animação de Pulsar o Anel Externo do Hotspot */
+@keyframes pulse-ring-glow {
+  0% {
+    transform: scale(0.7);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+/* Pulsar bolinha verde interna de badges */
+@keyframes pulse-ring-glow-small {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* Animação Flutuante dos Hotspots no Cenário */
+@keyframes float-soft {
+  0% {
+    transform: translate(-20px, -20px);
+  }
+  100% {
+    transform: translate(-20px, -30px);
+  }
+}
+
+/* Entrada animada do título do Totem */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Respiração sutil da cápsula de rodapé */
+@keyframes pulse-capsule {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+  100% {
+    transform: scale(1.02);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+  }
+}
+
+/* ==========================================================================
+   CONTEÚDO DINÂMICO: GRID DE IMPACTO EM NÚMEROS
+   ========================================================================== */
+.impacto-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.impacto-card {
+  background-color: var(--color-white);
+  border-radius: 20px;
+  padding: 30px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.02);
+  border: 1.5px solid rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.impacto-card:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+.impacto-numero {
+  font-family: var(--font-title);
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--color-green-hover); /* Verde Sesi Escuro do print */
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.impacto-rotulo {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  line-height: 1.35;
+}
+
+/* Título em Verde Sesi do print */
+.panel-title-green {
+  color: var(--color-green-hover) !important;
+  font-weight: 800;
+}
