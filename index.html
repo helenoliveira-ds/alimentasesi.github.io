@@ -10,78 +10,88 @@
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   
   <!-- Fontes Premium -->
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800;900&family=Fraunces:wght@500;600;700&display=swap" rel="stylesheet">
   
-  <!-- Estilos Customizados para Kiosk Touch -->
+  <!-- Folha de Estilos Customizada para Totem Touch -->
   <link rel="stylesheet" href="style.css">
  </head>
- <body data-template-id="__page-root" class="w-full h-full flex items-center justify-center overflow-hidden bg-[#020d04]">
+ <body class="w-full h-full flex items-center justify-center overflow-hidden bg-[#020d04]">
   
   <main class="totem-stage shadow-2xl relative overflow-hidden">
    <!-- Imagem de Fundo de Alta Definição -->
    <img data-template-id="main-photo" src="assets/bg_main_totem.jpg" loading="lazy" class="absolute inset-0 w-full h-full object-cover" draggable="false" alt="Background AlimentaSesi">
-   <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/25 to-black/85"></div>
+   <div class="absolute inset-0 bg-gradient-to-b from-black/45 via-transparent to-black/70"></div>
    
-   <!-- Bloco de Título Principal (Elevado para prioridade total de toque) -->
-   <div class="absolute top-52 left-0 right-0 z-20 px-8 text-center flex flex-col items-center gap-7">
-    <h1 data-template-id="totem-title" class="canva-text display-font leading-tight drop-shadow-lg text-6xl text-white"></h1>
-    
-    <!-- Botão de Acesso Rápido aos Indicadores -->
-    <button data-template-id="logo-button" type="button" onclick="openPanel('numbers')" class="canva-button px-6 py-4 rounded-full backdrop-blur-md bg-white/10 border border-white/20 shadow-lg flex items-center justify-center gap-3.5 pulse-btn transition-transform active:scale-95" aria-label="Ver números de impacto"> 
-     <img data-template-id="logo-img" src="assets/logo_alimentasesi_white.svg" class="canva-image w-36 h-9 object-contain" loading="lazy" draggable="false" alt="Logo AlimentaSesi">
-     <div class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center shrink-0 text-white pulse-btn-subtle">
-      <i data-lucide="hand-pointer" style="width:16px;height:16px;"></i>
-     </div>
+   <!-- Pílula de Cabeçalho Superior (Logo + Círculo Verde) -->
+   <div class="absolute top-12 left-0 right-0 z-30 flex justify-center px-8">
+    <button type="button" onclick="openPanel('numbers')" class="bg-white rounded-full pl-6 pr-4 py-3 shadow-2xl flex items-center justify-between gap-6 active:scale-95 transition-all select-none border border-slate-100" aria-label="Ver indicadores">
+      <img src="assets/logo_alimentasesi_dark.svg" class="h-8 w-auto object-contain" draggable="false" alt="Logo AlimentaSesi">
+      <div class="w-8 h-8 rounded-full bg-[#007934] shrink-0 shadow-sm"></div>
     </button>
    </div>
    
-   <!-- Hotspots Interativos (Pointer-events desativados na camada e reativados apenas nos botões) -->
-   <div class="hotspots-layer absolute inset-0 z-10">
-    <!-- Buffet --> 
-    <button type="button" onclick="openPanel('buffet')" class="hotspot absolute flex flex-col items-center gap-2" style="left:42%;top:72%;transform:translate(-50%,-50%)"> 
-     <span class="dot pulse-ring"></span> 
-     <span data-template-id="hotspot-buffet-label" class="canva-tag whitespace-nowrap text-base px-5 py-2.5 font-bold rounded-full backdrop-blur-md shadow-lg text-white"></span> 
-    </button> 
-    
-    <!-- Kitchen --> 
-    <button type="button" onclick="openPanel('kitchen')" class="hotspot absolute flex flex-col items-center gap-2" style="left:78%;top:36%;transform:translate(-50%,-50%)"> 
-     <span class="dot pulse-ring"></span> 
-     <span data-template-id="hotspot-kitchen-label" class="canva-tag whitespace-nowrap text-base px-5 py-2.5 font-bold rounded-full backdrop-blur-md shadow-lg text-white"></span> 
-    </button> 
-    
-    <!-- Team --> 
-    <button type="button" onclick="openPanel('team')" class="hotspot absolute flex flex-col items-center gap-2" style="left:47%;top:46%;transform:translate(-50%,-50%)"> 
-     <span class="dot pulse-ring"></span> 
-     <span data-template-id="hotspot-team-label" class="canva-tag whitespace-nowrap text-base px-5 py-2.5 font-bold rounded-full backdrop-blur-md shadow-lg text-white"></span> 
-    </button> 
-    
-    <!-- Education --> 
-    <button type="button" onclick="openPanel('education')" class="hotspot absolute flex flex-col items-center gap-2" style="left:15%;top:50%;transform:translate(-50%,-50%)"> 
-     <span class="dot pulse-ring"></span> 
-     <span data-template-id="hotspot-education-label" class="canva-tag whitespace-nowrap text-base px-5 py-2.5 font-bold rounded-full backdrop-blur-md shadow-lg text-white"></span> 
-    </button>
+   <!-- Títulos da Home -->
+   <div class="absolute top-44 left-0 right-0 z-20 px-8 text-center flex flex-col items-center">
+    <h2 class="text-white text-4xl font-bold tracking-wide drop-shadow-[0_4px_12px_rgba(0,0,0,0.65)] select-none">Explore a experiência</h2>
+    <h1 class="text-white text-6xl font-black tracking-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.75)] mt-1 select-none">alimentaSesi</h1>
    </div>
    
-   <!-- Dica de Navegação Visual -->
-   <div class="absolute bottom-10 left-0 right-0 z-10 flex justify-center">
-    <span data-template-id="tap-hint" class="tap-hint canva-tag flex items-center gap-2.5 px-6 py-3 rounded-full backdrop-blur-md shadow-lg text-base text-white"> 
-     <i data-lucide="hand-pointer" style="width:18px;height:18px;"></i> 
-     <span data-template-id="tap-hint-text" class="canva-text font-bold"></span> 
+   <!-- Camada de Hotspots Interativos (Pointer-events controlados via CSS) -->
+   <div class="hotspots-layer absolute inset-0 z-15">
+    
+    <!-- Hotspot: Cozinha Industrial (Topo Direito) --> 
+    <div class="hotspot-group absolute" style="left:88%; top:36%;">
+      <button type="button" onclick="openPanel('kitchen')" class="hotspot flex flex-col items-center"> 
+       <span class="dot pulse-ring"></span> 
+       <span class="canva-tag whitespace-nowrap text-white font-bold text-[13px] tracking-wide px-5 py-2.5 rounded-full shadow-2xl border border-white/20 bg-[#ff4e18] mt-3">Cozinha Industrial</span> 
+      </button> 
+    </div>
+
+    <!-- Hotspot: Nossa Equipe (Centro) --> 
+    <div class="hotspot-group absolute" style="left:59%; top:46%;">
+      <button type="button" onclick="openPanel('team')" class="hotspot flex flex-col items-center"> 
+       <span class="dot pulse-ring"></span> 
+       <span class="canva-tag whitespace-nowrap text-white font-bold text-[13px] tracking-wide px-5 py-2.5 rounded-full shadow-2xl border border-white/20 bg-[#3f9dd4] mt-3">Nossa Equipe</span> 
+      </button> 
+    </div>
+
+    <!-- Hotspot: Educação Nutricional (Esquerda) --> 
+    <div class="hotspot-group absolute" style="left:33%; top:51%;">
+      <button type="button" onclick="openPanel('education')" class="hotspot flex flex-col items-center"> 
+       <span class="dot pulse-ring"></span> 
+       <span class="canva-tag whitespace-nowrap text-white font-bold text-[13px] tracking-wide px-5 py-2.5 rounded-full shadow-2xl border border-white/20 bg-[#2cb22b] mt-3">Educação Nutricional</span> 
+      </button> 
+    </div>
+    
+    <!-- Hotspot: Restaurante & Buffet (Inferior Centro) --> 
+    <div class="hotspot-group absolute" style="left:61%; top:72%;">
+      <button type="button" onclick="openPanel('buffet')" class="hotspot flex flex-col items-center"> 
+       <span class="dot pulse-ring"></span> 
+       <span class="canva-tag whitespace-nowrap text-white font-bold text-[13px] tracking-wide px-5 py-2.5 rounded-full shadow-2xl border border-white/20 bg-[#007934] mt-3">Restaurante & Buffet</span> 
+      </button> 
+    </div>
+
+   </div>
+   
+   <!-- Barra de Dica no Rodapé -->
+   <div class="absolute bottom-12 left-0 right-0 z-20 flex justify-center px-8">
+    <span class="bg-[#133c23]/90 backdrop-blur-md text-white font-bold text-sm tracking-wide rounded-full px-8 py-3.5 shadow-2xl border border-white/10 select-none">
+     Toque nos hotspots para explorar o ambiente
     </span>
    </div>
    
    <!-- Backdrop Escurecedor para Fechamento ao Toque -->
-   <div id="backdrop" class="backdrop absolute inset-0 z-30 bg-black/60 backdrop-blur-sm" onclick="closePanel()"></div>
+   <div id="backdrop" class="backdrop absolute inset-0 z-35 bg-black/60 backdrop-blur-sm" onclick="closePanel()"></div>
    
    <!-- Painel Lateral Deslizante Inteligente (Dashboard Fixo) -->
-   <aside class="side-panel absolute top-0 right-0 z-40 h-full w-[760px] shadow-2xl flex flex-col border-l border-white/10" data-template-id="panel-surface" aria-hidden="true">
+   <aside class="side-panel absolute top-0 right-0 z-40 h-full w-[760px] shadow-2xl flex flex-col border-l border-white/10">
      
      <!-- Cabeçalho do Painel -->
      <div class="flex items-center justify-between px-8 py-6 border-b border-slate-200/80 bg-white">
       <div class="h-10 flex items-center">
-       <img data-template-id="panel-logo" src="assets/logo_alimentasesi_dark.svg" class="canva-image h-9 w-auto object-contain" loading="lazy" draggable="false" alt="Logo de Cabeçalho">
+       <img src="assets/logo_alimentasesi_dark.svg" class="canva-image h-9 w-auto object-contain" loading="lazy" draggable="false" alt="Logo de Cabeçalho">
       </div>
-      <button type="button" onclick="closePanel()" aria-label="Fechar" data-template-id="panel-close-btn" class="canva-button w-12 h-12 rounded-full flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-800 shadow transition-colors active:scale-90"> 
+      <button type="button" onclick="closePanel()" aria-label="Fechar" class="canva-button w-12 h-12 rounded-full flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-800 shadow transition-colors active:scale-90"> 
        <i data-lucide="x" style="width:24px;height:24px;"></i> 
       </button>
      </div>
@@ -92,16 +102,16 @@
       <!-- ============ SEÇÃO BUFFET ============ -->
       <section class="panel-section h-full flex flex-col justify-between gap-4" data-section="buffet">
        <div class="flex gap-4 items-center">
-         <img data-template-id="buffet-img" src="assets/img_buffet_main.jpg" loading="lazy" class="canva-image w-2/5 h-36 object-cover rounded-xl shadow-sm" draggable="false">
+         <img src="assets/img_buffet_main.jpg" loading="lazy" class="canva-image w-2/5 h-36 object-cover rounded-xl shadow-sm" draggable="false">
          <div class="w-3/5">
-           <h2 data-template-id="buffet-title" class="canva-text display-font text-3xl font-bold text-slate-800"></h2>
-           <p data-template-id="buffet-intro" class="canva-text mt-1.5 text-xs text-slate-500 leading-relaxed"></p>
+           <h2 class="canva-text display-font text-3xl font-bold text-slate-800">Restaurante & Buffet</h2>
+           <p class="canva-text mt-1.5 text-xs text-slate-500 leading-relaxed">Refeições planejadas sob medida para manter a energia diária dos colaboradores das indústrias, com muito mais sabor.</p>
          </div>
        </div>
        
        <!-- Grid de Seleção de Serviços do Buffet -->
        <div>
-         <h3 data-template-id="buffet-services-title" class="canva-text font-bold text-sm text-slate-700 mb-2"></h3>
+         <h3 class="canva-text font-bold text-sm text-slate-700 mb-2">Selecione o Serviço para Detalhes:</h3>
          <div id="buffet-services-grid" class="grid grid-cols-2 gap-2.5">
            <!-- Renderizado dinamicamente pelo script.js -->
          </div>
@@ -118,20 +128,22 @@
        
        <!-- Imagens de Detalhe Ajustadas (Altura h-36) -->
        <div class="grid grid-cols-2 gap-3">
-        <img data-template-id="buffet-photo-2" src="assets/img_buffet_detail_01.jpg" loading="lazy" class="canva-image w-full h-36 object-cover rounded-xl shadow-sm" draggable="false"> 
-        <img data-template-id="buffet-photo-3" src="assets/img_buffet_detail_02.jpg" loading="lazy" class="canva-image w-full h-36 object-cover rounded-xl shadow-sm" draggable="false">
+        <img src="assets/img_buffet_detail_01.jpg" loading="lazy" class="canva-image w-full h-36 object-cover rounded-xl shadow-sm" draggable="false"> 
+        <img src="assets/img_buffet_detail_02.jpg" loading="lazy" class="canva-image w-full h-36 object-cover rounded-xl shadow-sm" draggable="false">
        </div>
        
-       <p data-template-id="buffet-message" class="canva-banner bg-emerald-50 text-emerald-800 border border-emerald-100 p-4 rounded-xl text-center text-xs font-semibold leading-relaxed"></p>
+       <p class="canva-banner bg-emerald-50 text-emerald-800 border border-emerald-100 p-4 rounded-xl text-center text-xs font-semibold leading-relaxed">
+         💡 Redução inteligente: Substituímos frituras e temperos prontos por carnes assadas e ervas aromáticas.
+       </p>
       </section>
       
       <!-- ============ SEÇÃO COZINHA INTELIGENTE ============ -->
       <section class="panel-section h-full flex flex-col justify-between gap-4" data-section="kitchen">
        <div class="flex gap-4 items-center">
-         <img data-template-id="kitchen-img" src="assets/img_kitchen_main.jpg" loading="lazy" class="canva-image w-2/5 h-36 object-cover rounded-xl shadow-sm" draggable="false">
+         <img src="assets/img_kitchen_main.jpg" loading="lazy" class="canva-image w-2/5 h-36 object-cover rounded-xl shadow-sm" draggable="false">
          <div class="w-3/5">
-           <h2 data-template-id="kitchen-title" class="canva-text display-font text-3xl font-bold text-slate-800"></h2>
-           <p data-template-id="kitchen-intro" class="canva-text mt-1 text-xs text-slate-500 leading-relaxed"></p>
+           <h2 class="canva-text display-font text-3xl font-bold text-slate-800">Cozinha Industrial</h2>
+           <p class="canva-text mt-1 text-xs text-slate-500 leading-relaxed">Equipamentos que garantem a segurança alimentar e padronização absoluta das refeições sem perda nutricional.</p>
          </div>
        </div>
        
@@ -144,24 +156,13 @@
        
        <!-- Detalhe do Pilar Selecionado -->
        <div id="kitchen-pilar-detail" class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm min-h-[110px]">
-         <div class="hidden">
-           <div data-template-id="kitchen-quality-card">
-             <h3 data-template-id="kitchen-quality-title"></h3><p data-template-id="kitchen-quality-desc"></p>
-           </div>
-           <div data-template-id="kitchen-safety-card">
-             <h3 data-template-id="kitchen-safety-title"></h3><p data-template-id="kitchen-safety-desc"></p>
-           </div>
-           <div data-template-id="kitchen-innovative-card">
-             <h3 data-template-id="kitchen-innovative-title"></h3><p data-template-id="kitchen-innovative-desc"></p>
-           </div>
-         </div>
          <h4 id="kitchen-tab-title" class="font-bold text-slate-800 text-sm mb-1"></h4>
          <p id="kitchen-tab-desc" class="text-xs text-slate-600 leading-relaxed"></p>
        </div>
        
        <!-- Equipamentos de Ponta -->
        <div>
-         <h3 data-template-id="kitchen-equip-title" class="canva-text font-bold text-sm text-slate-700 mb-2"></h3>
+         <h3 class="canva-text font-bold text-sm text-slate-700 mb-2">Selecione o Equipamento:</h3>
          <div id="kitchen-equip-grid" class="grid grid-cols-4 gap-2">
            <!-- Injetado via script.js -->
          </div>
@@ -180,18 +181,11 @@
       <!-- ============ SEÇÃO NOSSA EQUIPE ============ -->
       <section class="panel-section h-full flex flex-col justify-between gap-4" data-section="team">
        <div class="flex gap-4 items-center">
-         <img data-template-id="team-img" src="assets/img_team_main.jpg" loading="lazy" class="canva-image w-2/5 h-36 object-cover rounded-xl shadow-sm" draggable="false">
+         <img src="assets/img_team_main.jpg" loading="lazy" class="canva-image w-2/5 h-36 object-cover rounded-xl shadow-sm" draggable="false">
          <div class="w-3/5">
-           <h2 data-template-id="team-title" class="canva-text display-font text-3xl font-bold text-slate-800"></h2>
-           <p data-template-id="team-intro" class="canva-text mt-1 text-xs text-slate-500 leading-relaxed"></p>
+           <h2 class="canva-text display-font text-3xl font-bold text-slate-800">Nossa Equipe</h2>
+           <p class="canva-text mt-1 text-xs text-slate-500 leading-relaxed">Profissionais técnicos treinados continuamente sob os rígidos padrões industriais de nutrição e serviço corporativo.</p>
          </div>
-       </div>
-       
-       <div class="hidden">
-         <span data-template-id="team-role-1"></span>
-         <span data-template-id="team-role-2"></span>
-         <span data-template-id="team-role-3"></span>
-         <span data-template-id="team-role-4"></span>
        </div>
        
        <!-- Grid de Papéis da Equipe -->
@@ -200,35 +194,34 @@
        </div>
        
        <!-- Caixa Estilizada: O Jeito de Atender -->
-       <div data-template-id="jeito-card" class="bg-white p-4 rounded-xl border border-amber-100 shadow-sm flex flex-col justify-between flex-1">
+       <div class="bg-white p-4 rounded-xl border border-amber-100 shadow-sm flex flex-col justify-between flex-1">
          <div>
            <div class="flex justify-between items-center mb-1">
-             <h3 data-template-id="jeito-title" class="canva-text display-font font-bold text-emerald-800 text-base"></h3>
-             <p data-template-id="jeito-list-title" class="canva-text text-slate-400 text-[10px] uppercase font-bold tracking-wider"></p>
+             <h3 class="canva-text display-font font-bold text-emerald-800 text-base">O Jeito AlimentaSesi de Atender</h3>
+             <p class="canva-text text-slate-400 text-[10px] uppercase font-bold tracking-wider">OS 4 PILARES DO ATENDIMENTO</p>
            </div>
-           <p data-template-id="jeito-intro" class="canva-text text-xs text-slate-500 mb-2 leading-relaxed"></p>
+           <p class="canva-text text-xs text-slate-500 mb-2 leading-relaxed">Nossa cultura une tradição e afeto. Cada refeição servida expressa respeito, confiança e dedicação pela culinária e pelas pessoas.</p>
            
            <ul class="grid grid-cols-2 gap-x-3 gap-y-1 text-slate-700 text-xs font-medium">
-            <li class="flex items-center gap-1.5"><span class="text-amber-500">•</span><span data-template-id="jeito-bullet-1" class="canva-text truncate"></span></li>
-            <li class="flex items-center gap-1.5"><span class="text-amber-500">•</span><span data-template-id="jeito-bullet-2" class="canva-text truncate"></span></li>
-            <li class="flex items-center gap-1.5"><span class="text-amber-500">•</span><span data-template-id="jeito-bullet-3" class="canva-text truncate"></span></li>
-            <li class="flex items-center gap-1.5"><span class="text-amber-500">•</span><span data-template-id="jeito-bullet-4" class="canva-text truncate"></span></li>
+            <li class="flex items-center gap-1.5"><span class="text-amber-500">•</span><span class="canva-text truncate">Ambiente aconchegante e limpo</span></li>
+            <li class="flex items-center gap-1.5"><span class="text-amber-500">•</span><span class="canva-text truncate">Atendimento amigável</span></li>
+            <li class="flex items-center gap-1.5"><span class="text-amber-500">•</span><span class="canva-text truncate">Adaptação flexível</span></li>
+            <li class="flex items-center gap-1.5"><span class="text-amber-500">•</span><span class="canva-text truncate">Sabor com garantia industrial</span></li>
            </ul>
          </div>
          
          <div class="flex items-center gap-3 mt-2 border-t border-slate-100 pt-2">
-           <!-- Mapeamento para a dupla extensão encontrada na exportação -->
-           <img data-template-id="jeito-photo" src="assets/img_atendimento_humanizado.jpg.jpg" loading="lazy" class="canva-image w-20 h-14 object-cover rounded-lg shadow-xs" draggable="false">
-           <p data-template-id="jeito-footer" class="canva-text text-[11px] text-slate-500 leading-tight"></p>
+           <img src="assets/img_atendimento_humanizado.jpg.jpg" loading="lazy" class="canva-image w-20 h-14 object-cover rounded-lg shadow-xs" draggable="false">
+           <p class="canva-text text-[11px] text-slate-500 leading-tight">✨ Atendemos indústrias de todos os portes com paixão, dedicação e carinho.</p>
          </div>
        </div>
        
        <!-- Card de Treinamentos -->
-       <div data-template-id="trainings-card" class="bg-[#f0f9ff] p-4 rounded-xl border border-sky-100 shadow-sm flex items-center gap-4">
-         <img data-template-id="team-training-img" src="assets/img_team_training.jpg" class="w-24 h-24 object-cover rounded-lg" draggable="false">
+       <div class="bg-[#f0f9ff] p-4 rounded-xl border border-sky-100 shadow-sm flex items-center gap-4">
+         <img src="assets/img_team_training.jpg" class="w-24 h-24 object-cover rounded-lg" draggable="false">
          <div class="flex-1">
-           <h3 data-template-id="trainings-title" class="font-bold text-sky-900 text-sm"></h3>
-           <p data-template-id="trainings-intro" class="text-[11px] text-sky-700 mt-0.5 leading-relaxed"></p>
+           <h3 class="font-bold text-sky-900 text-sm">Capacitação Contínua</h3>
+           <p class="text-[11px] text-sky-700 mt-0.5 leading-relaxed">Nossas equipes participam de capacitações constantes nos canais físicos e digitais.</p>
            <div class="grid grid-cols-2 gap-2 mt-2">
              <button type="button" onclick="openTeamTraining('presencial')" class="bg-white border border-sky-200 text-sky-800 text-[10px] font-bold py-1.5 px-2 rounded-lg text-center shadow-xs active:scale-95">Presencial</button>
              <button type="button" onclick="openTeamTraining('online')" class="bg-white border border-sky-200 text-sky-800 text-[10px] font-bold py-1.5 px-2 rounded-lg text-center shadow-xs active:scale-95">Plataforma Online</button>
@@ -240,15 +233,14 @@
       <!-- ============ SEÇÃO EDUCAÇÃO E CAMPANHAS ============ -->
       <section class="panel-section h-full flex flex-col justify-between gap-4" data-section="education">
        <div class="flex gap-4 items-center">
-         <!-- Mapeamento para a dupla extensão encontrada na exportação -->
-         <img data-template-id="edu-img" src="assets/img_education_main.jpg.jpg" loading="lazy" class="canva-image w-2/5 h-36 object-cover rounded-xl shadow-sm" draggable="false">
+         <img src="assets/img_education_main.jpg.jpg" loading="lazy" class="canva-image w-2/5 h-36 object-cover rounded-xl shadow-sm" draggable="false">
          <div class="w-3/5">
-           <h2 data-template-id="edu-headline" class="canva-text display-font text-3xl font-bold text-slate-800"></h2>
-           <p data-template-id="edu-intro" class="canva-text mt-1 text-xs text-slate-500 leading-relaxed"></p>
+           <h2 class="canva-text display-font text-3xl font-bold text-slate-800">Educação Nutricional</h2>
+           <p class="canva-text mt-1 text-xs text-slate-500 leading-relaxed">Disseminamos conhecimento alimentar de ponta para os trabalhadores realizarem escolhas equilibradas e colherem mais saúde.</p>
          </div>
        </div>
        
-       <p data-template-id="edu-campaigns-intro" class="canva-text text-slate-500 text-xs leading-relaxed"></p>
+       <p class="canva-text text-slate-500 text-xs leading-relaxed">Ações contínuas realizadas diretamente nas linhas do refeitório de forma lúdica:</p>
        
        <!-- Grid de Campanhas -->
        <div class="grid grid-cols-2 gap-3">
@@ -273,55 +265,47 @@
          </button>
        </div>
        
-       <div class="hidden">
-         <div data-template-id="edu-camp-1-card"><h4 data-template-id="edu-camp-1-title"></h4><p data-template-id="edu-camp-1-desc"></p></div>
-         <div data-template-id="edu-camp-2-card"><h4 data-template-id="edu-camp-2-title"></h4><p data-template-id="edu-camp-2-desc"></p></div>
-         <div data-template-id="edu-camp-3-card"><h4 data-template-id="edu-camp-3-title"></h4><p data-template-id="edu-camp-3-desc"></p></div>
-         <div data-template-id="edu-camp-4-card"><h4 data-template-id="edu-camp-4-title"></h4><p data-template-id="edu-camp-4-desc"></p></div>
-       </div>
-       
        <!-- Detalhe da Campanha Ativa -->
        <div id="campaign-detail-box" class="bg-white border p-5 rounded-2xl shadow-sm min-h-[140px] flex flex-col justify-center">
          <h4 id="campaign-detail-title" class="font-bold text-slate-800 text-base mb-1.5">Campanha Selecionada</h4>
          <p id="campaign-detail-desc" class="text-xs text-slate-600 leading-relaxed"></p>
        </div>
        
-       <!-- Mapeamento para a dupla extensão encontrada na exportação -->
-       <img data-template-id="edu-img-2" src="assets/img_education_footer.jpg.jpg" loading="lazy" class="canva-image w-full h-32 object-cover rounded-xl shadow-sm" draggable="false">
+       <img src="assets/img_education_footer.jpg.jpg" loading="lazy" class="canva-image w-full h-32 object-cover rounded-xl shadow-sm" draggable="false">
       </section>
       
       <!-- ============ SEÇÃO INDICADORES E NÚMEROS ============ -->
       <section class="panel-section h-full flex flex-col justify-between" data-section="numbers">
        <div>
-         <h2 data-template-id="numbers-title" class="canva-text display-font text-3xl font-bold text-center text-slate-800"></h2>
-         <p data-template-id="numbers-subtitle" class="canva-text mt-2 text-center text-xs text-slate-400 font-medium"></p>
+         <h2 class="canva-text display-font text-3xl font-bold text-center text-slate-800">Indicadores Globais</h2>
+         <p class="canva-text mt-2 text-center text-xs text-slate-400 font-medium">A força operacional da rede AlimentaSesi descrita no Relatório de Sustentabilidade</p>
        </div>
        
        <!-- Grid de Indicadores -->
        <div class="grid grid-cols-2 gap-4 my-auto">
-        <div data-template-id="num-card-1" class="canva-card p-5 rounded-2xl text-center shadow-xs border border-emerald-100 bg-white">
-         <p data-template-id="num-1-value" class="canva-text display-font text-3xl font-bold text-emerald-600"></p>
-         <p data-template-id="num-1-label" class="canva-text text-xs mt-1.5 font-bold text-slate-500 leading-tight"></p>
+        <div class="canva-card p-5 rounded-2xl text-center shadow-xs border border-emerald-100 bg-white">
+         <p id="num-1-value" class="canva-text display-font text-3xl font-bold text-emerald-600"></p>
+         <p id="num-1-label" class="canva-text text-xs mt-1.5 font-bold text-slate-500 leading-tight"></p>
         </div>
-        <div data-template-id="num-card-2" class="canva-card p-5 rounded-2xl text-center shadow-xs border border-emerald-100 bg-white">
-         <p data-template-id="num-2-value" class="canva-text display-font text-3xl font-bold text-emerald-600"></p>
-         <p data-template-id="num-2-label" class="canva-text text-xs mt-1.5 font-bold text-slate-500 leading-tight"></p>
+        <div class="canva-card p-5 rounded-2xl text-center shadow-xs border border-emerald-100 bg-white">
+         <p id="num-2-value" class="canva-text display-font text-3xl font-bold text-emerald-600"></p>
+         <p id="num-2-label" class="canva-text text-xs mt-1.5 font-bold text-slate-500 leading-tight"></p>
         </div>
-        <div data-template-id="num-card-3" class="canva-card p-5 rounded-2xl text-center shadow-xs border border-emerald-100 bg-white">
-         <p data-template-id="num-3-value" class="canva-text display-font text-3xl font-bold text-emerald-600"></p>
-         <p data-template-id="num-3-label" class="canva-text text-xs mt-1.5 font-bold text-slate-500 leading-tight"></p>
+        <div class="canva-card p-5 rounded-2xl text-center shadow-xs border border-emerald-100 bg-white">
+         <p id="num-3-value" class="canva-text display-font text-3xl font-bold text-emerald-600"></p>
+         <p id="num-3-label" class="canva-text text-xs mt-1.5 font-bold text-slate-500 leading-tight"></p>
         </div>
-        <div data-template-id="num-card-4" class="canva-card p-5 rounded-2xl text-center shadow-xs border border-emerald-100 bg-white">
-         <p data-template-id="num-4-value" class="canva-text display-font text-3xl font-bold text-emerald-600"></p>
-         <p data-template-id="num-4-label" class="canva-text text-xs mt-1.5 font-bold text-slate-500 leading-tight"></p>
+        <div class="canva-card p-5 rounded-2xl text-center shadow-xs border border-emerald-100 bg-white">
+         <p id="num-4-value" class="canva-text display-font text-3xl font-bold text-emerald-600"></p>
+         <p id="num-4-label" class="canva-text text-xs mt-1.5 font-bold text-slate-500 leading-tight"></p>
         </div>
-        <div data-template-id="num-card-5" class="canva-card p-5 rounded-2xl text-center shadow-xs border border-emerald-100 bg-white">
-         <p data-template-id="num-5-value" class="canva-text display-font text-3xl font-bold text-emerald-600"></p>
-         <p data-template-id="num-5-label" class="canva-text text-xs mt-1.5 font-bold text-slate-500 leading-tight"></p>
+        <div class="canva-card p-5 rounded-2xl text-center shadow-xs border border-emerald-100 bg-white">
+         <p id="num-5-value" class="canva-text display-font text-3xl font-bold text-emerald-600"></p>
+         <p id="num-5-label" class="canva-text text-xs mt-1.5 font-bold text-slate-500 leading-tight"></p>
         </div>
-        <div data-template-id="num-card-6" class="canva-card p-5 rounded-2xl text-center shadow-xs border border-emerald-100 bg-white">
-         <p data-template-id="num-6-value" class="canva-text display-font text-3xl font-bold text-emerald-600"></p>
-         <p data-template-id="num-6-label" class="canva-text text-xs mt-1.5 font-bold text-slate-500 leading-tight"></p>
+        <div class="canva-card p-5 rounded-2xl text-center shadow-xs border border-emerald-100 bg-white">
+         <p id="num-6-value" class="canva-text display-font text-3xl font-bold text-emerald-600"></p>
+         <p id="num-6-label" class="canva-text text-xs mt-1.5 font-bold text-slate-500 leading-tight"></p>
         </div>
        </div>
        
@@ -335,7 +319,7 @@
    </aside>
    
    <!-- Modal para Informações de Treinamento/Cargos -->
-   <div id="training-modal" class="hidden absolute inset-0 bg-black/75 z-50 flex items-center justify-center p-12">
+   <div id="training-modal" class="hidden absolute inset-0 bg-black/75 z-55 flex items-center justify-center p-12 animate-fade">
      <div class="bg-white rounded-3xl p-8 max-w-[500px] w-full shadow-2xl relative">
        <button onclick="closeTrainingModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 font-bold active:scale-90">✕</button>
        <div class="flex items-center gap-3 border-b pb-3 mb-4">
